@@ -86,9 +86,19 @@ export default function MainPage() {
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="space-y-1">
-              <h1 className="text-xl font-semibold">Git Happens</h1>
-              <p className="text-sm text-muted-foreground">Interactive Git Tutorial</p>
+            <div className="flex items-center gap-4">
+              {/* DrawerSidebar Toggle */}
+              <DrawerSidebar
+                scenes={scenes}
+                currentScene={currentScene}
+                onSceneSelect={goToScene}
+                onRestart={restartTutorial}
+              />
+              
+              <div className="space-y-1">
+                <h1 className="text-xl font-semibold">Git Happens</h1>
+                <p className="text-sm text-muted-foreground">Interactive Git Tutorial</p>
+              </div>
             </div>
             
             <div className="flex items-center gap-4">
@@ -177,7 +187,7 @@ export default function MainPage() {
                   className={`relative inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
                     activeTab === 'story'
                       ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm border border-gray-200 dark:border-gray-600'
-                      : 'text-gray-600 dark:text-gray-400 '
+                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-white/50 dark:hover:bg-gray-700/50'
                   }`}
                 >
                   <BookOpen className="w-4 h-4" />
@@ -188,7 +198,7 @@ export default function MainPage() {
                   className={`relative inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
                     activeTab === 'terminal'
                       ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm border border-gray-200 dark:border-gray-600'
-                      : 'text-gray-600 dark:text-gray-400 '
+                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-white/50 dark:hover:bg-gray-700/50'
                   }`}
                 >
                   <Monitor className="w-4 h-4" />
@@ -267,14 +277,6 @@ export default function MainPage() {
             </div>
           )}
         </div>
-
-        {/* Components remain unchanged */}
-        <DrawerSidebar
-          scenes={scenes}
-          currentScene={currentScene}
-          onSceneSelect={goToScene}
-          onRestart={restartTutorial}
-        />
 
         <ErrorModal
           show={showErrorModal}
