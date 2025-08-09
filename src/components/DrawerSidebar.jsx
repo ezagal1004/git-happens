@@ -27,7 +27,13 @@ export default function DrawerSidebar({ scenes, currentScene, onSceneSelect, onR
   }, [isOpen]);
 
   const toggleModal = () => {
-    setIsOpen(!isOpen);
+    if (isOpen) {
+      // Start closing animation
+      setIsOpen(false);
+    } else {
+      // Open immediately and let CSS handle the animation
+      setIsOpen(true);
+    }
   };
 
   const handleSceneClick = (sceneId) => {
@@ -42,12 +48,16 @@ export default function DrawerSidebar({ scenes, currentScene, onSceneSelect, onR
 
   const modalContent = (
     <div 
-      className="fixed inset-0 bg-black/60 z-[9999] flex items-center justify-center p-4 backdrop-blur-sm"
+      className={`fixed inset-0 bg-black/60 z-[9999] flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300 ${
+        isOpen ? 'opacity-100' : 'opacity-0'
+      }`}
       onClick={() => setIsOpen(false)}
     >
       {/* Modal Content */}
       <div 
-        className="bg-background border rounded-xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col transform scale-100 transition-all duration-300 ease-out"
+        className={`bg-background border rounded-xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col transition-all duration-300 ease-out ${
+          isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
