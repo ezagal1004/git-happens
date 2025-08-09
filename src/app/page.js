@@ -88,7 +88,8 @@ export default function MainPage() {
       <header className="bg-black/20 backdrop-blur-sm border-b border-gray-700 p-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-blue-400">Git: The Interactive Trauma Simulator</h1>
+            <h1 className="text-2xl font-bold text-blue-400">Git Happens</h1>
+            <p>A TechnoSphere Solutions Training Nightmare</p>
           </div>
           <div className="flex items-center space-x-4">
             <div className="text-sm">
