@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { BookOpen, Monitor, RotateCcw, ChevronRight } from 'lucide-react';
 import Terminal from '@/components/Terminal';
 import tutorialData from '@/data/git-tutorial-data.json';
 import DrawerSidebar from '@/components/DrawerSidebar';
@@ -11,23 +12,20 @@ export default function MainPage() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [showErrorModal, setShowErrorModal] = useState(false);
-  const [activeTab, setActiveTab] = useState('story'); // 'story' or 'terminal'
+  const [activeTab, setActiveTab] = useState('story');
 
   const scenes = tutorialData.tutorial.scenes;
   const currentSceneData = scenes[currentScene.toString()];
 
-  // Scene transition with animation
   const goToScene = (sceneId) => {
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentScene(sceneId);
       setIsTransitioning(false);
-      // Auto-switch to story tab when scene changes
       setActiveTab('story');
     }, 300);
   };
 
-  // Handle narrative scene choices
   const handleChoice = (choice) => {
     if (choice.knowledge) {
       setKnowledgeLevel(prev => prev + choice.knowledge);
@@ -35,31 +33,25 @@ export default function MainPage() {
     goToScene(choice.next);
   };
 
-  // Handle terminal command execution
   const handleTerminalCommand = (command) => {
     if (command === currentSceneData.correctCommand) {
       goToScene(currentSceneData.nextSceneOnSuccess);
     }
-    // If wrong command, stay on current scene - ErrorModal will be shown by handleTerminalError
   };
 
-  // Handle terminal error
   const handleTerminalError = () => {
     setErrorMessage(currentSceneData.errorMessage);
     setShowErrorModal(true);
   };
 
-  // Close error modal
   const closeErrorModal = () => {
     setShowErrorModal(false);
     setErrorMessage('');
   };
 
-  // Progress calculation
   const totalScenes = Object.keys(scenes).length;
   const progress = ((currentScene + 1) / totalScenes) * 100;
 
-  // Restart tutorial
   const restartTutorial = () => {
     setCurrentScene(0);
     setKnowledgeLevel(0);
@@ -68,13 +60,19 @@ export default function MainPage() {
 
   if (!currentSceneData) {
     return (
-      <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Tutorial Complete!</h1>
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="text-center space-y-6 max-w-md">
+          <div className="space-y-2">
+            <h1 className="text-3xl font-semibold tracking-tight">Tutorial Complete</h1>
+            <p className="text-muted-foreground">
+              Congratulations on completing the Git tutorial!
+            </p>
+          </div>
           <button 
             onClick={restartTutorial}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
           >
+            <RotateCcw className="w-4 h-4" />
             Start Over
           </button>
         </div>
@@ -83,73 +81,86 @@ export default function MainPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white">
-      {/* Header with progress */}
-      <header className="bg-black/20 backdrop-blur-sm border-b border-gray-700 p-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-blue-400">Git Happens</h1>
-            <p>A TechnoSphere Solutions Training Nightmare</p>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="text-sm">
-              <span className="text-gray-400">Knowledge:</span>
-              <span className={`ml-2 px-2 py-1 rounded text-xs ${
-                knowledgeLevel >= 8 ? 'bg-green-600' : 
-                knowledgeLevel >= 5 ? 'bg-yellow-600' : 
-                'bg-red-600'
-              }`}>
-                {knowledgeLevel}/10
-              </span>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="space-y-1">
+              <h1 className="text-xl font-semibold">Git Happens</h1>
+              <p className="text-sm text-muted-foreground">Interactive Git Tutorial</p>
             </div>
-            <div className="w-32 bg-gray-700 rounded-full h-2">
-              <div 
-                className="bg-blue-500 h-2 rounded-full transition-all duration-500"
-                style={{ width: `${progress}%` }}
-              />
+            
+            <div className="flex items-center gap-4">
+              {/* Knowledge Level */}
+              <div className="flex items-center gap-2 text-sm">
+                <span className="text-muted-foreground">Knowledge</span>
+                <div className={`px-2 py-1 rounded-md text-xs font-medium ${
+                  knowledgeLevel >= 8 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 
+                  knowledgeLevel >= 5 ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' : 
+                  'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                }`}>
+                  {knowledgeLevel}/10
+                </div>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="flex items-center gap-3">
+                <div className="w-24 h-2 bg-secondary rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-primary transition-all duration-500 ease-out"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+                <span className="text-sm text-muted-foreground font-mono">
+                  {currentScene + 1}/{totalScenes}
+                </span>
+              </div>
             </div>
-            <span className="text-sm text-gray-400">
-              {currentScene + 1}/{totalScenes}
-            </span>
           </div>
         </div>
       </header>
 
-      {/* Main content area */}
-      <main className="max-w-6xl mx-auto p-6 h-[calc(100vh-120px)]">
-        <div className={`h-full transition-all duration-300 ${
-          isTransitioning ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-6 max-w-4xl">
+        <div className={`transition-all duration-300 ease-in-out ${
+          isTransitioning ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'
         }`}>
           
           {/* Narrative Scene */}
           {currentSceneData.type === 'narrative' && (
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 h-full flex flex-col">
-              <div className="flex-1">
-                <h2 className="text-3xl font-bold mb-4 text-blue-300">
+            <div className="space-y-6">
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold tracking-tight">
                   {currentSceneData.title}
                 </h2>
-                <div className="prose prose-invert prose-lg max-w-none mb-6">
-                  <p className="whitespace-pre-line text-gray-200 leading-relaxed">
+                <div className="prose prose-neutral dark:prose-invert max-w-none">
+                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
                     {currentSceneData.content}
                   </p>
                 </div>
               </div>
 
-              <div className="space-y-3 flex-shrink-0">
+              <div className="space-y-3">
                 {currentSceneData.choices.map((choice, index) => (
                   <button
                     key={index}
                     onClick={() => handleChoice(choice)}
-                    className="block w-full text-left p-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg transition-all duration-200 transform hover:scale-[1.02] hover:shadow-lg"
+                    className="group w-full flex items-center justify-between p-4 text-left bg-card border rounded-lg hover:bg-accent/50 transition-colors"
                   >
-                    <span className="font-medium">{choice.text}</span>
-                    {choice.knowledge && (
-                      <span className={`ml-2 text-xs px-2 py-1 rounded ${
-                        choice.knowledge > 0 ? 'bg-green-500/30' : 'bg-red-500/30'
-                      }`}>
-                        {choice.knowledge > 0 ? '+' : ''}{choice.knowledge} knowledge
-                      </span>
-                    )}
+                    <div className="flex items-center gap-3">
+                      <span className="font-medium">{choice.text}</span>
+                      {choice.knowledge && (
+                        <span className={`text-xs px-2 py-1 rounded-md font-medium ${
+                          choice.knowledge > 0 
+                            ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' 
+                            : 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
+                        }`}>
+                          {choice.knowledge > 0 ? '+' : ''}{choice.knowledge}
+                        </span>
+                      )}
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-0.5 transition-transform" />
                   </button>
                 ))}
               </div>
@@ -158,53 +169,56 @@ export default function MainPage() {
 
           {/* Terminal Scene with Tabs */}
           {currentSceneData.type === 'terminal' && (
-            <div className="h-full flex flex-col">
+            <div className="space-y-6">
               {/* Tab Navigation */}
-              <div className="flex space-x-1 mb-6">
+              <div className="inline-flex p-1 bg-muted rounded-lg">
                 <button
                   onClick={() => setActiveTab('story')}
-                  className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     activeTab === 'story'
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      ? 'bg-background text-foreground shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
-                  📖 Story
+                  <BookOpen className="w-4 h-4" />
+                  Story
                 </button>
                 <button
                   onClick={() => setActiveTab('terminal')}
-                  className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     activeTab === 'terminal'
-                      ? 'bg-green-600 text-white shadow-lg'
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      ? 'bg-background text-foreground shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
-                  💻 Terminal
+                  <Monitor className="w-4 h-4" />
+                  Terminal
                 </button>
               </div>
 
               {/* Tab Content */}
-              <div className="flex-1 overflow-hidden">
+              <div className="min-h-[400px]">
                 {/* Story Tab */}
                 {activeTab === 'story' && (
-                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 h-full flex flex-col">
-                    <div className="flex-1 overflow-y-auto">
-                      <h2 className="text-3xl font-bold mb-4 text-green-400">
+                  <div className="space-y-6">
+                    <div className="space-y-4">
+                      <h2 className="text-2xl font-semibold tracking-tight">
                         {currentSceneData.title}
                       </h2>
-                      <div className="prose prose-invert prose-lg max-w-none">
-                        <p className="whitespace-pre-line text-gray-200 leading-relaxed">
+                      <div className="prose prose-neutral dark:prose-invert max-w-none">
+                        <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
                           {currentSceneData.content}
                         </p>
                       </div>
                     </div>
                     
-                    <div className="flex-shrink-0 mt-6 pt-6 border-t border-gray-600">
+                    <div className="pt-4 border-t">
                       <button
                         onClick={() => setActiveTab('terminal')}
-                        className="w-full px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors font-medium"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
                       >
-                        Continue to Terminal →
+                        Continue to Terminal
+                        <ChevronRight className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
@@ -212,24 +226,25 @@ export default function MainPage() {
 
                 {/* Terminal Tab */}
                 {activeTab === 'terminal' && (
-                  <div className="h-full flex flex-col space-y-6">
-                    {/* Command - Above Terminal */}
-                    <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-600 flex-shrink-0">
-                      <h3 className="text-lg font-semibold text-gray-300 mb-4">Command:</h3>
-                      <div className="grid grid-cols-1 gap-3">
-                        <div className="p-3 rounded-lg border border-gray-600 bg-gray-900/50">
-                          <div className="text-green-400 font-mono text-sm">
-                            $ {currentSceneData.correctCommand}
-                          </div>
+                  <div className="space-y-6">
+                    {/* Command Instructions */}
+                    <div className="space-y-4 p-4 bg-muted/30 rounded-lg border">
+                      <h3 className="font-medium">Command Required</h3>
+                      <div className="space-y-2">
+                        <div className="p-3 bg-card border rounded-md font-mono text-sm">
+                          <span className="text-muted-foreground">$ </span>
+                          <span className="text-green-600 dark:text-green-400">
+                            {currentSceneData.correctCommand}
+                          </span>
                         </div>
+                        <p className="text-xs text-muted-foreground">
+                          Type this command in the terminal below to continue
+                        </p>
                       </div>
-                      <p className="text-xs text-gray-500 mt-4">
-                        💡 Type this command in the terminal below to continue
-                      </p>
                     </div>
 
-                    {/* Terminal component */}
-                    <div className="flex-1 min-h-0">
+                    {/* Terminal Component */}
+                    <div className="min-h-[200px]">
                       <Terminal
                         prompt={currentSceneData.prompt}
                         choices={currentSceneData.choices}
@@ -245,7 +260,7 @@ export default function MainPage() {
           )}
         </div>
 
-        {/* Drawer Sidebar */}
+        {/* Components remain unchanged */}
         <DrawerSidebar
           scenes={scenes}
           currentScene={currentScene}
@@ -253,7 +268,6 @@ export default function MainPage() {
           onRestart={restartTutorial}
         />
 
-        {/* Global Error Modal */}
         <ErrorModal
           show={showErrorModal}
           errorMessage={errorMessage}
