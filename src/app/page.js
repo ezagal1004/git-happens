@@ -146,21 +146,21 @@ export default function MainPage() {
                   <button
                     key={index}
                     onClick={() => handleChoice(choice)}
-                    className="group w-full flex items-center justify-between p-4 text-left bg-card border rounded-lg hover:bg-accent/50 transition-colors"
+                    className="group w-full flex items-center justify-between p-4 text-left bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 transition-all shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="font-medium">{choice.text}</span>
+                      <span className="font-medium text-gray-900 dark:text-gray-100">{choice.text}</span>
                       {choice.knowledge && (
                         <span className={`text-xs px-2 py-1 rounded-md font-medium ${
                           choice.knowledge > 0 
-                            ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' 
-                            : 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
+                            ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' 
+                            : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'
                         }`}>
                           {choice.knowledge > 0 ? '+' : ''}{choice.knowledge}
                         </span>
                       )}
                     </div>
-                    <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-0.5 transition-transform" />
+                    <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 group-hover:translate-x-0.5 transition-all" />
                   </button>
                 ))}
               </div>
@@ -171,13 +171,13 @@ export default function MainPage() {
           {currentSceneData.type === 'terminal' && (
             <div className="space-y-6">
               {/* Tab Navigation */}
-              <div className="inline-flex p-1 bg-muted rounded-lg">
+              <div className="inline-flex p-1 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm border">
                 <button
                   onClick={() => setActiveTab('story')}
-                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`relative inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
                     activeTab === 'story'
-                      ? 'bg-background text-foreground shadow-sm'
-                      : 'text-muted-foreground hover:text-foreground'
+                      ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm border border-gray-200 dark:border-gray-600'
+                      : 'text-gray-600 dark:text-gray-400 '
                   }`}
                 >
                   <BookOpen className="w-4 h-4" />
@@ -185,10 +185,10 @@ export default function MainPage() {
                 </button>
                 <button
                   onClick={() => setActiveTab('terminal')}
-                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`relative inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
                     activeTab === 'terminal'
-                      ? 'bg-background text-foreground shadow-sm'
-                      : 'text-muted-foreground hover:text-foreground'
+                      ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm border border-gray-200 dark:border-gray-600'
+                      : 'text-gray-600 dark:text-gray-400 '
                   }`}
                 >
                   <Monitor className="w-4 h-4" />
@@ -197,10 +197,14 @@ export default function MainPage() {
               </div>
 
               {/* Tab Content */}
-              <div className="min-h-[400px]">
+              <div className="min-h-[400px] relative">
                 {/* Story Tab */}
-                {activeTab === 'story' && (
-                  <div className="space-y-6">
+                <div className={`absolute inset-0 transition-all duration-300 ${
+                  activeTab === 'story' 
+                    ? 'opacity-100 translate-x-0 pointer-events-auto' 
+                    : 'opacity-0 translate-x-4 pointer-events-none'
+                }`}>
+                  <div className="space-y-6 h-full">
                     <div className="space-y-4">
                       <h2 className="text-2xl font-semibold tracking-tight">
                         {currentSceneData.title}
@@ -215,29 +219,33 @@ export default function MainPage() {
                     <div className="pt-4 border-t">
                       <button
                         onClick={() => setActiveTab('terminal')}
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all border border-gray-200 dark:border-gray-700 shadow-sm font-medium"
                       >
                         Continue to Terminal
-                        <ChevronRight className="w-4 h-4" />
+                        <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                       </button>
                     </div>
                   </div>
-                )}
+                </div>
 
                 {/* Terminal Tab */}
-                {activeTab === 'terminal' && (
-                  <div className="space-y-6">
+                <div className={`absolute inset-0 transition-all duration-300 ${
+                  activeTab === 'terminal' 
+                    ? 'opacity-100 translate-x-0 pointer-events-auto' 
+                    : 'opacity-0 -translate-x-4 pointer-events-none'
+                }`}>
+                  <div className="space-y-6 h-full">
                     {/* Command Instructions */}
-                    <div className="space-y-4 p-4 bg-muted/30 rounded-lg border">
-                      <h3 className="font-medium">Command Required</h3>
+                    <div className="space-y-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                      <h3 className="font-medium text-gray-900 dark:text-gray-100">Command Required</h3>
                       <div className="space-y-2">
-                        <div className="p-3 bg-card border rounded-md font-mono text-sm">
-                          <span className="text-muted-foreground">$ </span>
+                        <div className="p-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md font-mono text-sm shadow-sm">
+                          <span className="text-gray-500 dark:text-gray-400">$ </span>
                           <span className="text-green-600 dark:text-green-400">
                             {currentSceneData.correctCommand}
                           </span>
                         </div>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-gray-600 dark:text-gray-400">
                           Type this command in the terminal below to continue
                         </p>
                       </div>
@@ -254,7 +262,7 @@ export default function MainPage() {
                       />
                     </div>
                   </div>
-                )}
+                </div>
               </div>
             </div>
           )}
