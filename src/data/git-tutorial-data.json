@@ -1,0 +1,170 @@
+{
+  "tutorial": {
+    "title": "Git Tutorial with Adult Swim-style Humor",
+    "description": "Streamlined Git Tutorial with single error responses",
+    "scenes": {
+      "0": {
+        "type": "narrative",
+        "title": "Corporate Git Reality Check",
+        "content": "You're a junior dev at TechnoSphere Solutions. Day one revelation: Marcus, the \"senior developer,\" has been doing version control by emailing himself ZIP files and naming folders \"project_v1_final_REALLY_FINAL_jesus_fuck_please_work\".\n\nYour manager Linda approaches with the dead-eyed stare of someone who's explained basic shit to mouth-breathing idiots all quarter.\n\n\"Learn Git,\" she says. \"Marcus rage-quit yesterday when someone mentioned 'merge conflicts.' He started sobbing and ran out screaming about how GitHub was 'designed by sadists.'\"\n\nWelcome to 2025, where grown-ass developers still think Ctrl+C, Ctrl+V is a sustainable development strategy. This is your life now.",
+        "choices": [
+          { "text": "What the actual fuck is Git?", "next": 1, "knowledge": 1 }
+        ]
+      },
+      "1": {
+        "type": "narrative",
+        "title": "The Git Explanation (Sort Of)",
+        "content": "Linda opens Wikipedia and reads like she's translating ancient fucking hieroglyphs: \"Git is a distributed version control system for tracking changes in source code during software development.\"\n\nShe looks at you like she just explained the meaning of life. You realize she understands Git about as well as she understands why people watch reality TV.\n\nHere's the real deal: Git is basically a time machine for your code that was designed by masochists. Every time you save (commit), it creates a snapshot you can return to. It's like having infinite save states in a video game, except the game is your career and losing means explaining to your landlord why you can't make rent this month.\n\nPlus there's GitHub - Git with a web interface and social features for antisocial nerds.",
+        "choices": [
+          { "text": "Install Git and learn this clusterfuck", "next": 2, "knowledge": 2 }
+        ]
+      },
+      "2": {
+        "type": "terminal",
+        "title": "Git Installation: Time to Clone Some Shit",
+        "content": "You install Git. The process is surprisingly straightforward, which should be your first major red flag that nothing else about this experience will be remotely user-friendly.\n\nTerminal time, bitches. You type 'git --version' and get back 'git version 2.39.0'. Congratulations, you now possess a tool that can either save your entire career or obliterate months of work with a single mistyped character.\n\nGit is like a loaded shotgun - incredibly powerful, but the safety mechanism is just a bunch of cryptic command flags that assume you have a PhD in Computer Science and a masochistic streak.\n\nTime to get some actual code from GitHub. Your team's repository is at github.com/technosphere/dumpster-fire-api. The name is not ironic.",
+        "prompt": "Time to clone this shitshow of a repository:",
+        "choices": [
+          "git clone https://github.com/technosphere/dumpster-fire-api.git",
+          "git download https://github.com/technosphere/dumpster-fire-api.git",
+          "git get https://github.com/technosphere/dumpster-fire-api.git"
+        ],
+        "correctCommand": "git clone https://github.com/technosphere/dumpster-fire-api.git",
+        "nextSceneOnSuccess": 3,
+        "errorMessage": "What the fuck? I literally just told you it's 'git clone'. Did you think Git would magically understand your creative interpretation of basic commands? Try again, genius."
+      },
+      "3": {
+        "type": "terminal",
+        "title": "Successful Clone: Welcome to Hell",
+        "content": "You run 'git clone https://github.com/technosphere/dumpster-fire-api.git' and Git downloads the entire project history to your machine like a digital parasite.\n\nYou now have a complete copy of the repository - every file, every change, every commit message like \"fixed bug (i think)\" and \"WHY THE FUCK ISN'T THIS WORKING\" and \"dear god please let this work\".\n\nThis is distributed version control: everyone gets the full history of everyone else's failures and regrets. If GitHub gets nuked tomorrow, you still have everything. It's like having a backup of humanity's collective coding shame.\n\nTime to make your first change. You edit README.md because that's what developers do when they can't think of anything actually useful to contribute.",
+        "prompt": "You've edited README.md like every other basic developer. Now stage this masterpiece:",
+        "choices": [
+          "git add README.md",
+          "git save README.md",
+          "git stage README.md"
+        ],
+        "correctCommand": "git add README.md",
+        "nextSceneOnSuccess": 4,
+        "errorMessage": "Seriously? It's 'git add'. Not 'git save', not 'git stage', not 'git please-work-this-time'. Just 'git add'. Are you even paying attention?"
+      },
+      "4": {
+        "type": "terminal",
+        "title": "The Staging Area: Git's Bureaucratic Nightmare",
+        "content": "You run 'git add README.md' and nothing visible happens because Git believes in psychological warfare through silence.\n\nYour file is now \"staged\" - sitting in Git's waiting room like a patient at the DMV. This seems unnecessarily bureaucratic until you realize it lets you group related changes together before committing them, which is actually useful if you're not a complete fucking disaster.\n\nIt's like reviewing your shopping cart before checkout, except the store is your codebase and a mistake could tank the entire product and get you fired.\n\nPro tip: 'git status' shows you what's staged and ready to commit, like a helpful reminder of your impending doom.",
+        "prompt": "Time to commit this shit to the eternal Git history:",
+        "choices": [
+          "git commit -m \"Update README\"",
+          "git commit",
+          "git save -m \"Update README\""
+        ],
+        "correctCommand": "git commit -m \"Update README\"",
+        "nextSceneOnSuccess": 5,
+        "errorMessage": "Did you miss the part where I said 'git commit -m \"Update README\"'? The -m flag is crucial unless you want to get trapped in Vim hell. Pay fucking attention."
+      },
+      "5": {
+        "type": "terminal",
+        "title": "First Commit: You're Now Officially Dangerous",
+        "content": "You run 'git commit -m \"Update README\"' and Git responds with:\n\n[main a7f8b2c] Update README\n1 file changed, 3 insertions(+)\n\nHoly fucking shit, you actually did it. You've created a commit - a snapshot of your project frozen in time like a bug trapped in amber, except the bug is your code and the amber is your eternal shame.\n\nThis is like creating a save point in a video game, except instead of fighting dragons, you're fighting bugs, deadlines, and the slowly dawning realization that you have no idea what you're doing.\n\nBut this commit only exists on your machine like a dirty secret. To share it with the team and make it everyone else's problem too, you need to run 'git push origin main' to upload your changes to GitHub.",
+        "prompt": "Now push your genius to GitHub so everyone can witness your brilliance:",
+        "choices": [
+          "git push origin main",
+          "git upload origin main",
+          "git send origin main"
+        ],
+        "correctCommand": "git push origin main",
+        "nextSceneOnSuccess": 6,
+        "errorMessage": "Jesus Christ, it's 'git push origin main'. Not upload, not send, not publish. PUSH. Were you not listening when I explained this exact command 30 seconds ago?"
+      },
+      "6": {
+        "type": "narrative",
+        "title": "Push to GitHub: Sharing Your Digital Shame",
+        "content": "You run 'git push origin main' and your changes upload to GitHub faster than your regret can catch up. Your commit is now part of the official project history, visible to the entire team and preserved for all eternity.\n\nThis is the basic Git workflow that keeps the software development world from collapsing into complete anarchy:\n1. Clone repository from GitHub (get the shit)\n2. Make changes (break the shit)\n3. Add and commit changes locally (save the shit)\n4. Push to GitHub (share the shit with everyone)\n\nIf someone else pushed changes while you were dicking around, Git will make you pull their changes first with 'git pull origin main'. This prevents you from accidentally overwriting their work and starting a developer blood feud.\n\nCollaboration without homicide - truly a revolutionary concept.",
+        "choices": [
+          { "text": "Learn about branches - the real shit", "next": 7, "knowledge": 3 }
+        ]
+      },
+      "7": {
+        "type": "terminal",
+        "title": "Branching: Parallel Universe Bullshit",
+        "content": "Now for the real shit: branches. This is where Git transitions from \"useful tool\" to \"holy fuck, this is actually brilliant\" territory.\n\nBranches let you work on features without breaking the main codebase like a bull in a china shop. Think of them as parallel universes: in the 'main' branch, everything works (theoretically). In your 'feature-login' branch, you're experimenting with authentication code that might cause the server to achieve sentience and declare war on humanity.\n\nThe beautiful part is these universes don't affect each other until you explicitly merge them, which is when the real fun begins.\n\nTo create and switch to a new branch, you use 'git checkout -b feature-user-auth' because Git loves combining multiple actions into single commands that make no intuitive sense.",
+        "prompt": "Create a branch so you can break shit without destroying everyone else's work:",
+        "choices": [
+          "git checkout -b feature-user-auth",
+          "git branch feature-user-auth",
+          "git new-branch feature-user-auth"
+        ],
+        "correctCommand": "git checkout -b feature-user-auth",
+        "nextSceneOnSuccess": 8,
+        "errorMessage": "Are you fucking kidding me? I just said 'git checkout -b feature-user-auth'. That's the exact command. Copy and paste it if you have to, but get it right."
+      },
+      "8": {
+        "type": "narrative",
+        "title": "Branch Universe: Parallel Development Madness",
+        "content": "You create the 'feature-user-auth' branch and switch to it like jumping between dimensions in Rick and Morty, except instead of avoiding galactic governments, you're avoiding breaking everyone else's code.\n\nYou're now in a parallel universe where you can fuck things up without affecting the main codebase. You add login.js, commit your changes, and these commits exist only in your branch while the main branch remains blissfully unaware of your experiments.\n\nThis is where Git becomes actually useful: multiple developers can work on different features simultaneously without stepping on each other's digital dicks. It's collaborative development without the traditional chaos and blood feuds.\n\nWhen your feature is ready (spoiler: it never really is), you'll merge this branch back to main. But that's a whole other level of potential disaster.",
+        "choices": [
+          { "text": "Practice the merge workflow", "next": 9, "knowledge": 4 }
+        ]
+      },
+      "9": {
+        "type": "terminal",
+        "title": "Merge Workflow: Bringing Universes Together",
+        "content": "Time to practice the merge workflow, also known as \"how to potentially fuck up everyone's day in four easy steps\":\n\n1. Switch to main: 'git checkout main' (abandon your experimental universe)\n2. Get latest changes: 'git pull origin main' (absorb other people's chaos)\n3. Merge your feature: 'git merge feature-user-auth' (combine the universes)\n4. Push the result: 'git push origin main' (make it everyone's problem)\n\nIf you're lucky, Git handles this automatically and you feel like a wizard. If you're unlucky, you get merge conflicts - Git's way of saying \"two people changed the same line and I have no fucking clue which version you want, so you figure it out.\"\n\nMerge conflicts look like Git had a stroke and started speaking in tongues with angle brackets.",
+        "prompt": "First step in the merge dance - switch back to main before you fuck everything up:",
+        "choices": [
+          "git checkout main",
+          "git switch main",
+          "git goto main"
+        ],
+        "correctCommand": "git checkout main",
+        "nextSceneOnSuccess": 10,
+        "errorMessage": "What the fuck? Did you not just read what the command was? It's 'git checkout main'. Right there in the instructions. Use your eyes."
+      },
+      "10": {
+        "type": "terminal",
+        "title": "Merge the Feature Branch",
+        "content": "Good job! You're back on the main branch where everything is (theoretically) stable and production-ready. Now comes the moment of truth - merging your experimental feature branch back into main.\n\nThis is where Git either becomes your best friend or your worst nightmare. If you're lucky, Git will automatically combine the changes. If you're unlucky, you'll get merge conflicts and have to manually resolve them while questioning your life choices.\n\nRemember: 'git merge' brings the changes from another branch into your current branch. Since you're on main, this will bring your feature-user-auth changes into main.",
+        "prompt": "Now merge your feature branch into main:",
+        "choices": [
+          "git merge feature-user-auth",
+          "git combine feature-user-auth",
+          "git join feature-user-auth"
+        ],
+        "correctCommand": "git merge feature-user-auth",
+        "nextSceneOnSuccess": 11,
+        "errorMessage": "Holy shit, I literally just explained this. It's 'git merge feature-user-auth'. MERGE. Not combine, not join, not whatever creative bullshit you just typed."
+      },
+      "11": {
+        "type": "terminal",
+        "title": "Branch Cleanup: Digital Hygiene",
+        "content": "After merging, you need to clean up your branches like cleaning up after a digital party where everyone got too drunk on code commits.\n\nDelete local branch: 'git branch -d feature-user-auth' (murder the local copy)\nDelete remote branch: 'git push origin --delete feature-user-auth' (murder the GitHub copy)\n\nOr if the branch is broken and won't delete nicely:\n'git branch -D feature-user-auth' (force murder with extreme prejudice)\n\nThis keeps your repository clean and prevents it from turning into a digital hoarder's paradise. Dead branches are like dirty dishes - ignore them long enough and eventually everything smells like regret and abandoned dreams.\n\nSome teams use 'git branch' to list all branches, then systematically delete the corpses of completed features. It's like digital spring cleaning, but with more existential dread.",
+        "prompt": "Time for digital hygiene - delete this useless branch before it breeds:",
+        "choices": [
+          "git branch -d feature-user-auth",
+          "git delete feature-user-auth",
+          "git remove feature-user-auth"
+        ],
+        "correctCommand": "git branch -d feature-user-auth",
+        "nextSceneOnSuccess": 12,
+        "errorMessage": "Are you even trying? It's 'git branch -d feature-user-auth'. I just fucking told you that. Can you read or are you just mashing buttons at random?"
+      },
+      "12": {
+        "type": "narrative",
+        "title": "Git Graduation: You've Survived the Digital Gauntlet",
+        "content": "Congratulations, you magnificent bastard. You understand the real Git workflow without having a complete mental breakdown:\n\n✓ Cloning repositories from GitHub (digital theft)\n✓ Making and committing changes (digital vandalism)\n✓ Pushing and pulling with remote repositories (digital sharing)\n✓ Creating and merging branches (digital universe management)\n✓ Branch cleanup (digital hygiene)\n\nYou can now work on a development team without immediately destroying everything and getting fired on your first day. You understand enough Git to be productive and only occasionally dangerous to yourself and others.\n\nThe advanced stuff - rebasing, cherry-picking, submodules - can wait. You've learned enough to function in professional software development without having a complete psychological breakdown.\n\nStatus: Certified Git-competent human being who probably won't accidentally delete the entire codebase.",
+        "choices": [
+          { "text": "Learn advanced Git wizardry", "next": 13, "knowledge": 5 },
+          { "text": "Start over to practice this digital masochism", "next": 0, "knowledge": 0 }
+        ]
+      },
+      "13": {
+        "type": "narrative",
+        "title": "Advanced Git: Here Be Dragons (And Therapy Bills)",
+        "content": "Welcome to advanced Git territory, where even senior developers fear to tread without backup plans and therapy appointments:\n\n- 'git rebase' (rewrite history like a digital dictator)\n- 'git cherry-pick' (steal commits from other branches like a code pirate)\n- 'git stash' (temporarily hide your shame)\n- 'git bisect' (hunt bugs with the persistence of a serial killer)\n- 'git submodule' (repositories inside repositories, inception-style mindfuck)\n- 'git hook' (automated actions that trigger like digital land mines)\n\nThese tools can save your ass or completely obliterate months of work faster than you can say \"oh fuck oh fuck oh fuck.\" Use them wisely, or better yet, don't use them until you absolutely have to and preferably not alone.\n\nRemember: with great Git power comes great responsibility not to fuck everything up so catastrophically that your team considers switching careers to pottery or goat farming.\n\nYou've completed the basic Git tutorial. In the real world, you'll fuck up spectacularly at least three times before any of this makes sense, but that's part of the learning process. Welcome to software development, where imposter syndrome is a feature, not a bug.",
+        "choices": [
+          { "text": "I've learned enough Git for several lifetimes", "next": 12, "knowledge": 10 },
+          { "text": "Start over because I'm a masochist", "next": 0, "knowledge": 0 }
+        ]
+      }
+    }
+  }
+}
