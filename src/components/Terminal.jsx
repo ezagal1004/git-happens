@@ -66,8 +66,8 @@ export default function Terminal({ prompt, choices, correctCommand, onCommand, o
       if (command === correctCommand) {
         onCommand(command);
       } else {
-        // Clear command history on error and trigger error in parent component
-        setHistory([]);
+        // Trigger error in parent component
+
         onError();
       }
     }, 800);
