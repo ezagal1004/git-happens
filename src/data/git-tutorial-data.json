@@ -1,7 +1,7 @@
 {
   "tutorial": {
     "title": "Git Tutorial with Adult Swim-style Humor",
-    "description": "Streamlined Git Tutorial with single error responses",
+    "description": "Streamlined Git Tutorial with dual error responses",
     "scenes": {
       "0": {
         "type": "narrative",
@@ -31,7 +31,8 @@
         ],
         "correctCommand": "git clone https://github.com/technosphere/dumpster-fire-api.git",
         "nextSceneOnSuccess": 3,
-        "errorMessage": "What the fuck? I literally just told you it's 'git clone'. Did you think Git would magically understand your creative interpretation of basic commands? Try again, genius."
+        "errorMessage": "What the fuck? I literally just told you it's 'git clone'. Did you think Git would magically understand your creative interpretation of basic commands? Try again, genius.",
+        "errorMessage2": "You got 'git clone' right, congratulations on basic reading comprehension. But what the fuck did you do with the URL? It's literally right there in the instructions. Copy and paste it exactly, you absolute walnut."
       },
       "3": {
         "type": "terminal",
@@ -45,7 +46,8 @@
         ],
         "correctCommand": "git add README.md",
         "nextSceneOnSuccess": 4,
-        "errorMessage": "Seriously? It's 'git add'. Not 'git save', not 'git stage', not 'git please-work-this-time'. Just 'git add'. Are you even paying attention?"
+        "errorMessage": "Seriously? It's 'git add'. Not 'git save', not 'git stage', not 'git please-work-this-time'. Just 'git add'. Are you even paying attention?",
+        "errorMessage2": "Holy shit, you actually typed 'git add'! Gold star for you. But then you butchered the filename like a drunk surgeon. It's 'README.md' - capital letters matter, and so does the .md extension, genius."
       },
       "4": {
         "type": "terminal",
@@ -59,7 +61,8 @@
         ],
         "correctCommand": "git commit -m \"Update README\"",
         "nextSceneOnSuccess": 5,
-        "errorMessage": "Did you miss the part where I said 'git commit -m \"Update README\"'? The -m flag is crucial unless you want to get trapped in Vim hell. Pay fucking attention."
+        "errorMessage": "Did you miss the part where I said 'git commit -m \"Update README\"'? The -m flag is crucial unless you want to get trapped in Vim hell. Pay fucking attention.",
+        "errorMessage2": "Okay, 'git commit' is correct, you're not completely hopeless. But you forgot the -m flag and commit message. Do you want to get trapped in Vim hell? Because that's how you get trapped in Vim hell, you masochist."
       },
       "5": {
         "type": "terminal",
@@ -73,7 +76,8 @@
         ],
         "correctCommand": "git push origin main",
         "nextSceneOnSuccess": 6,
-        "errorMessage": "Jesus Christ, it's 'git push origin main'. Not upload, not send, not publish. PUSH. Were you not listening when I explained this exact command 30 seconds ago?"
+        "errorMessage": "Jesus Christ, it's 'git push origin main'. Not upload, not send, not publish. PUSH. Were you not listening when I explained this exact command 30 seconds ago?",
+        "errorMessage2": "Great, you got 'git push' right. But 'origin main' isn't optional decoration - it tells Git WHERE to push and WHICH branch. Without it, Git just sits there confused like a tourist without GPS."
       },
       "6": {
         "type": "narrative",
@@ -95,7 +99,8 @@
         ],
         "correctCommand": "git checkout -b feature-user-auth",
         "nextSceneOnSuccess": 8,
-        "errorMessage": "Are you fucking kidding me? I just said 'git checkout -b feature-user-auth'. That's the exact command. Copy and paste it if you have to, but get it right."
+        "errorMessage": "Are you fucking kidding me? I just said 'git checkout -b feature-user-auth'. That's the exact command. Copy and paste it if you have to, but get it right.",
+        "errorMessage2": "You got 'git checkout' right, congratulations on reading the first two words. But you forgot the -b flag and branch name. The -b creates a NEW branch, you magnificent disaster. Try the whole command."
       },
       "8": {
         "type": "narrative",
@@ -117,7 +122,8 @@
         ],
         "correctCommand": "git checkout main",
         "nextSceneOnSuccess": 10,
-        "errorMessage": "What the fuck? Did you not just read what the command was? It's 'git checkout main'. Right there in the instructions. Use your eyes."
+        "errorMessage": "What the fuck? Did you not just read what the command was? It's 'git checkout main'. Right there in the instructions. Use your eyes.",
+        "errorMessage2": "You got 'git checkout' right, but then what the hell is 'main'? Oh wait, that's the branch name. You need both parts, genius - 'git checkout main' switches TO the main branch."
       },
       "10": {
         "type": "terminal",
@@ -131,7 +137,8 @@
         ],
         "correctCommand": "git merge feature-user-auth",
         "nextSceneOnSuccess": 11,
-        "errorMessage": "Holy shit, I literally just explained this. It's 'git merge feature-user-auth'. MERGE. Not combine, not join, not whatever creative bullshit you just typed."
+        "errorMessage": "Holy shit, I literally just explained this. It's 'git merge feature-user-auth'. MERGE. Not combine, not join, not whatever creative bullshit you just typed.",
+        "errorMessage2": "You got 'git merge' right, you're learning! But you fucked up the branch name. It's 'feature-user-auth' - exactly as we created it. Branch names matter, dipshit."
       },
       "11": {
         "type": "terminal",
@@ -145,7 +152,8 @@
         ],
         "correctCommand": "git branch -d feature-user-auth",
         "nextSceneOnSuccess": 12,
-        "errorMessage": "Are you even trying? It's 'git branch -d feature-user-auth'. I just fucking told you that. Can you read or are you just mashing buttons at random?"
+        "errorMessage": "Are you even trying? It's 'git branch -d feature-user-auth'. I just fucking told you that. Can you read or are you just mashing buttons at random?",
+        "errorMessage2": "You got 'git branch' right, but forgot the -d flag and branch name. The -d means DELETE, you beautiful disaster. Without it, Git just lists your branches like a confused directory."
       },
       "12": {
         "type": "narrative",

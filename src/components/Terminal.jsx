@@ -66,9 +66,22 @@ export default function Terminal({ prompt, choices, correctCommand, onCommand, o
       if (command === correctCommand) {
         onCommand(command);
       } else {
-        // Trigger error in parent component
-
-        onError();
+        // Determine which error message to use
+        const correctParts = correctCommand.split(' ');
+        const userParts = command.trim().split(' ');
+        
+        // Check if they got the main git command right (first 2 parts usually)
+        const gotMainCommandRight = correctParts.length >= 2 && 
+                                   userParts.length >= 2 && 
+                                   userParts[0] === correctParts[0] && 
+                                   userParts[1] === correctParts[1];
+        
+        // Trigger appropriate error
+        if (gotMainCommandRight) {
+          onError('close'); // They got the main command right but syntax wrong
+        } else {
+          onError('wrong'); // Completely wrong command
+        }
       }
     }, 800);
   };

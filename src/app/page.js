@@ -39,8 +39,16 @@ export default function MainPage() {
     }
   };
 
-  const handleTerminalError = () => {
-    setErrorMessage(currentSceneData.errorMessage);
+  const handleTerminalError = (errorType) => {
+    // Determine which error message to use based on error type
+    let message;
+    if (errorType === 'close' && currentSceneData.errorMessage2) {
+      message = currentSceneData.errorMessage2;
+    } else {
+      message = currentSceneData.errorMessage;
+    }
+    
+    setErrorMessage(message);
     setShowErrorModal(true);
   };
 
