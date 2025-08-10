@@ -8,6 +8,7 @@ export default function Terminal({ prompt, choices, correctCommand, onCommand, o
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [isTyping, setIsTyping] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
+  const [cursorPosition, setCursorPosition] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const inputRef = useRef(null);
   const terminalRef = useRef(null);
@@ -30,6 +31,13 @@ export default function Terminal({ prompt, choices, correctCommand, onCommand, o
     }, 500);
     return () => clearInterval(interval);
   }, []);
+
+  // Track cursor position changes
+  const updateCursorPosition = () => {
+    if (inputRef.current) {
+      setCursorPosition(inputRef.current.selectionStart || 0);
+    }
+  };
 
   // Auto-focus terminal input (desktop only)
   useEffect(() => {
@@ -75,6 +83,13 @@ export default function Terminal({ prompt, choices, correctCommand, onCommand, o
         const newIndex = historyIndex === -1 ? history.length - 1 : Math.max(0, historyIndex - 1);
         setHistoryIndex(newIndex);
         setInput(history[newIndex]);
+        // Update cursor position after state update
+        setTimeout(() => {
+          if (inputRef.current) {
+            inputRef.current.setSelectionRange(history[newIndex].length, history[newIndex].length);
+            setCursorPosition(history[newIndex].length);
+          }
+        }, 0);
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
@@ -83,9 +98,17 @@ export default function Terminal({ prompt, choices, correctCommand, onCommand, o
         if (newIndex >= history.length) {
           setHistoryIndex(-1);
           setInput('');
+          setCursorPosition(0);
         } else {
           setHistoryIndex(newIndex);
           setInput(history[newIndex]);
+          // Update cursor position after state update
+          setTimeout(() => {
+            if (inputRef.current) {
+              inputRef.current.setSelectionRange(history[newIndex].length, history[newIndex].length);
+              setCursorPosition(history[newIndex].length);
+            }
+          }, 0);
         }
       }
     } else if (e.key === 'Tab') {
@@ -96,8 +119,18 @@ export default function Terminal({ prompt, choices, correctCommand, onCommand, o
       );
       if (match) {
         setInput(match);
+        // Update cursor position after autocomplete
+        setTimeout(() => {
+          if (inputRef.current) {
+            inputRef.current.setSelectionRange(match.length, match.length);
+            setCursorPosition(match.length);
+          }
+        }, 0);
       }
     }
+    
+    // Update cursor position for other keys
+    setTimeout(updateCursorPosition, 0);
   };
 
   // Click terminal to focus
@@ -158,8 +191,15 @@ export default function Terminal({ prompt, choices, correctCommand, onCommand, o
               ref={inputRef}
               type="text"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                setInput(e.target.value);
+                // Update cursor position after input change
+                setTimeout(updateCursorPosition, 0);
+              }}
               onKeyDown={handleKeyDown}
+              onKeyUp={updateCursorPosition}
+              onClick={updateCursorPosition}
+              onSelect={updateCursorPosition}
               className="bg-transparent text-slate-100 outline-none w-full caret-transparent break-all resize-none"
               placeholder={isMobile ? "Tap to type command..." : ""}
               autoComplete="off"
@@ -172,7 +212,7 @@ export default function Terminal({ prompt, choices, correctCommand, onCommand, o
               <span 
                 className={`absolute top-0 text-slate-100 pointer-events-none ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity`}
                 style={{ 
-                  left: `${input.length * 0.6}em`,
+                  left: `${cursorPosition * 0.6}em`,
                   transform: 'translateX(0)' 
                 }}
               >
@@ -205,7 +245,16 @@ export default function Terminal({ prompt, choices, correctCommand, onCommand, o
               {choices.slice(0, 3).map((choice, index) => (
                 <button
                   key={index}
-                  onClick={() => setInput(choice)}
+                  onClick={() => {
+                    setInput(choice);
+                    setCursorPosition(choice.length);
+                    if (inputRef.current) {
+                      inputRef.current.focus();
+                      setTimeout(() => {
+                        inputRef.current.setSelectionRange(choice.length, choice.length);
+                      }, 0);
+                    }
+                  }}
                   className="text-xs px-2 py-1 bg-slate-800 text-slate-300 rounded border border-slate-600 hover:bg-slate-700 transition-colors touch-manipulation"
                 >
                   {choice}
