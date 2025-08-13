@@ -169,8 +169,217 @@
         "title": "Advanced Git: Here Be Dragons (And Therapy Bills)",
         "content": "Welcome to advanced Git territory, where even senior developers fear to tread without backup plans and therapy appointments:\n\n- 'git rebase' (rewrite history like a digital dictator)\n- 'git cherry-pick' (steal commits from other branches like a code pirate)\n- 'git stash' (temporarily hide your shame)\n- 'git bisect' (hunt bugs with the persistence of a serial killer)\n- 'git submodule' (repositories inside repositories, inception-style mindfuck)\n- 'git hook' (automated actions that trigger like digital land mines)\n\nThese tools can save your ass or completely obliterate months of work faster than you can say \"oh fuck oh fuck oh fuck.\" Use them wisely, or better yet, don't use them until you absolutely have to and preferably not alone.\n\nRemember: with great Git power comes great responsibility not to fuck everything up so catastrophically that your team considers switching careers to pottery or goat farming.\n\nYou've completed the basic Git tutorial. In the real world, you'll fuck up spectacularly at least three times before any of this makes sense, but that's part of the learning process. Welcome to software development, where imposter syndrome is a feature, not a bug.",
         "choices": [
-          { "text": "I've learned enough Git for several lifetimes", "next": 12, "knowledge": 10 },
+          { "text": "I like suffering, keep going", "next": 14, "knowledge": 10 },
           { "text": "Start over because I'm a masochist", "next": 0, "knowledge": 0 }
+        ]
+      },
+      "14": {
+        "type": "narrative",
+        "title": "The Merge Conflict Apocalypse Begins",
+        "content": "Three weeks later, Linda storms into your cubicle looking like someone just told her the coffee machine is broken permanently.\n\n\"Congratulations, genius,\" she says, throwing a laptop at your desk. \"You've graduated from 'basic Git incompetence' to 'advanced Git catastrophe.' Sarah and Mike both worked on the user authentication feature simultaneously because apparently communication is a foreign concept in this hellscape of a company.\"\n\nShe points at the screen, which shows the digital equivalent of a car crash:\n\n```\nAuto-merging auth.js\nCONFLICT (content): Merge conflict in auth.js\nAutomatic merge failed; fix conflicts and then commit the result.\n```\n\n\"Welcome to merge conflicts,\" Linda says with the enthusiasm of someone scheduling their own root canal. \"Git's way of saying 'fuck you, figure it out yourself.' This is where junior developers go to die.\"",
+        "choices": [
+          { "text": "What the fuck is a merge conflict?", "next": 15, "knowledge": 5 }
+        ]
+      },
+      "15": {
+        "type": "narrative",
+        "title": "Merge Conflicts: When Git Has a Mental Breakdown",
+        "content": "Linda opens the conflicted file and you see something that looks like Git had a stroke:\n\n```\n<<<<<<< HEAD\nfunction validateUser(email, password) {\n    if (!email || !password) {\n        throw new Error('Email and password required');\n    }\n}\n=======\nfunction validateUser(userEmail, userPassword) {\n    if (userEmail.length === 0 || userPassword.length === 0) {\n        return { error: 'Missing credentials' };\n    }\n}\n>>>>>>> feature-auth-validation\n```\n\n\"This clusterfuck,\" Linda explains, \"is Git's way of saying 'two people changed the same lines and I have no fucking clue which version you want.' The angle brackets are conflict markers - everything between <<<<<<< HEAD and ======= is your current branch. Everything between ======= and >>>>>>> is the other branch.\"\n\n\"Your job is to manually decide which version to keep, or combine them into something that doesn't immediately explode the entire codebase.\"",
+        "choices": [
+          { "text": "Learn to resolve this nightmare", "next": 16, "knowledge": 6 }
+        ]
+      },
+      "16": {
+        "type": "terminal",
+        "title": "Conflict Resolution: Digital Surgery",
+        "content": "You stare at the merge conflict like a deer in headlights. The two versions of the function are similar but different enough to make you question your life choices.\n\nSarah's version (HEAD) throws exceptions and uses the original parameter names. Mike's version (feature-auth-validation) returns error objects and uses more descriptive parameter names.\n\nAfter consulting with both developers (who each insist their version is obviously superior), you decide to combine the best of both approaches. You edit the file to remove the conflict markers and create a unified version.\n\nTime to tell Git the conflict is resolved.",
+        "prompt": "After manually fixing the conflict, stage the resolved file:",
+        "choices": [
+          "git add auth.js",
+          "git resolve auth.js", 
+          "git fix auth.js"
+        ],
+        "correctCommand": "git add auth.js",
+        "nextSceneOnSuccess": 17,
+        "errorMessage": "What the actual fuck? It's still 'git add'. Resolving a conflict doesn't magically create new Git commands. You edit the file, then 'git add' it like always.",
+        "errorMessage2": "You got 'git add' right, but then you completely butchered the filename. It's 'auth.js' - the same file that had the conflict. Pay attention."
+      },
+      "17": {
+        "type": "terminal", 
+        "title": "Completing the Merge",
+        "content": "You run 'git add auth.js' and Git silently accepts your resolution. The file is now staged, which means Git believes you've successfully resolved the conflict.\n\nBut you're not done yet. The merge is still in progress - Git is waiting for you to complete it by creating a merge commit. This commit will combine both branches and include your conflict resolution.\n\nTime to finish this clusterfuck with a merge commit.",
+        "prompt": "Complete the merge by creating a commit:",
+        "choices": [
+          "git commit",
+          "git merge --continue",
+          "git finish"
+        ],
+        "correctCommand": "git commit",
+        "nextSceneOnSuccess": 18,
+        "errorMessage": "Jesus Christ, it's just 'git commit'. No special flags, no magical incantations. Just 'git commit' to finish the merge.",
+        "errorMessage2": "You typed 'git commit' correctly, congratulations on basic literacy. But you don't need any extra bullshit after it - just 'git commit' finishes the merge."
+      },
+      "18": {
+        "type": "narrative",
+        "title": "Merge Conflict Survivor",
+        "content": "You run 'git commit' and Git opens your default editor with a pre-filled merge commit message:\n\n```\nMerge branch 'feature-auth-validation'\n\n# Conflicts:\n#\tauth.js\n```\n\nYou save and close the editor. Git completes the merge and creates a commit that combines both branches. Congratulations, you've survived your first merge conflict without having a complete psychological breakdown.\n\nLinda nods approvingly. \"Not bad for someone who probably still thinks 'rebase' is a military term. You've learned the most important skill in collaborative development: manually fixing Git's existential crises.\"\n\n\"But this was easy mode,\" she continues ominously. \"Wait until you encounter a three-way conflict across multiple files with hundreds of changes. That's when people start updating their LinkedIn profiles.\"",
+        "choices": [
+          { "text": "Learn advanced Git nightmares", "next": 19, "knowledge": 7 },
+          { "text": "Practice more basic Git trauma", "next": 0, "knowledge": 0 }
+        ]
+      },
+      "19": {
+        "type": "narrative",
+        "title": "Advanced Git Horror Stories",
+        "content": "Linda's eyes gleam with sadistic joy.\n\n\"You think merge conflicts are bad? Let me tell you about the real shit that makes senior developers cry into their coffee:\n\n**Detached HEAD State**: When you accidentally checkout a commit instead of a branch and Git helpfully informs you that you're 'in detached HEAD state' - which sounds like a medical emergency and feels like one too.\n\n**Rebase Hell**: Where you try to rewrite history and Git decides to make you relive every conflict from the past six months, one commit at a time.\n\n**The Stash Dimension**: A parallel universe where your uncommitted changes go to die, accessible only through arcane 'git stash' commands that nobody fully understands.\n\n**Force Push Catastrophe**: The nuclear option that can obliterate months of team progress with a single mistyped command.\n\nReady to traumatize yourself further?\"",
+        "choices": [
+          { "text": "Experience detached HEAD trauma", "next": 20, "knowledge": 8 },
+          { "text": "Learn the rebase nightmare", "next": 24, "knowledge": 8 },
+          { "text": "Explore stash dimension horror", "next": 28, "knowledge": 8 },
+          { "text": "I've learned enough Git to last several lifetimes", "next": 32, "knowledge": 10 }
+        ]
+      },
+      "20": {
+        "type": "terminal",
+        "title": "Detached HEAD: When Git Loses Its Mind",
+        "content": "Linda demonstrates the detached HEAD state by having you checkout a specific commit hash instead of a branch name.\n\n\"Watch this,\" she says with the glee of someone showing off a particularly gruesome magic trick. \"Instead of checking out a branch, let's checkout a specific commit.\"\n\nShe shows you the commit log and picks a random commit hash: a7f8b2c.\n\n\"This is how you accidentally enter the Git equivalent of the Twilight Zone.\"",
+        "prompt": "Checkout the specific commit to enter detached HEAD state:",
+        "choices": [
+          "git checkout a7f8b2c",
+          "git switch a7f8b2c",
+          "git goto a7f8b2c"
+        ],
+        "correctCommand": "git checkout a7f8b2c",
+        "nextSceneOnSuccess": 21,
+        "errorMessage": "For fuck's sake, it's 'git checkout a7f8b2c'. We literally just went through this with branches. Same command, different target.",
+        "errorMessage2": "You got 'git checkout' right, but then you fucked up the commit hash. It's 'a7f8b2c' - copy it exactly, you disaster."
+      },
+      "21": {
+        "type": "narrative",
+        "title": "Welcome to Detached HEAD Hell",
+        "content": "Git responds with a wall of text that reads like a panic attack:\n\n```\nNote: switching to 'a7f8b2c'.\n\nYou are in 'detached HEAD' state. You can look around, make experimental changes and commit them, and you can discard any commits you make in this state without impacting any branches...\n\nHEAD is now at a7f8b2c Update README\n```\n\n\"Congratulations,\" Linda says, \"you're now in Git limbo. You're looking at your repository from a specific point in history, but you're not on any branch. It's like time travel, except if you make changes and forget to create a branch, those changes disappear into the digital void.\"\n\n\"This is where junior developers panic and start googling 'how to fix detached HEAD git' while questioning their career choices.\"",
+        "choices": [
+          { "text": "Learn how to escape this nightmare", "next": 22, "knowledge": 9 }
+        ]
+      },
+      "22": {
+        "type": "terminal",
+        "title": "Escaping Detached HEAD",
+        "content": "\"The good news,\" Linda explains, \"is that escaping detached HEAD is easier than escaping student loan debt. You have several options:\n\n1. 'git switch -' goes back to your previous branch (the panic button)\n2. 'git switch main' goes to a specific branch  \n3. 'git switch -c new-branch-name' creates a new branch from this commit\n\nThe key is NOT to panic. Detached HEAD sounds terrifying but it's really just Git's way of letting you browse history safely.\"\n\nShe points at the terminal. \"Let's use the panic button and get back to safety.\"",
+        "prompt": "Escape detached HEAD state by returning to the previous branch:",
+        "choices": [
+          "git switch -",
+          "git checkout -",
+          "git return"
+        ],
+        "correctCommand": "git switch -",
+        "nextSceneOnSuccess": 23,
+        "errorMessage": "Pay attention! I just said 'git switch -' is the panic button. Not checkout, not return. SWITCH with a dash.",
+        "errorMessage2": "You got 'git switch' right but missed the dash. The dash (-) means 'go back to the previous branch' - it's the Git equivalent of the back button."
+      },
+      "23": {
+        "type": "narrative",
+        "title": "Detached HEAD Survivor",
+        "content": "You run 'git switch -' and Git cheerfully responds:\n\n```\nSwitched to branch 'main'\n```\n\nYou're back on solid ground. The detached HEAD state is behind you like a bad dream.\n\n\"See?\" Linda says. \"Detached HEAD sounds scary, but it's really just Git letting you browse history without accidentally fucking anything up. The panic happens because Git's warning message reads like a medical emergency report.\"\n\n\"In reality, detached HEAD is Git's safety feature. You can look around, even make experimental commits, and if you don't like them, just switch back to a branch and they disappear.\"\n\n\"But most developers see the words 'detached HEAD' and immediately assume they've broken everything. Pro tip: you haven't. Git is scary, not fragile.\"",
+        "choices": [
+          { "text": "Learn about rebase hell", "next": 24, "knowledge": 9 },
+          { "text": "Explore other Git nightmares", "next": 19, "knowledge": 9 }
+        ]
+      },
+      "24": {
+        "type": "narrative",
+        "title": "Rebase: The History Rewriting Nightmare",
+        "content": "Linda cracks her knuckles like a pianist preparing for Carnegie Hall.\n\n\"Rebase is Git's time machine for rewriting history. It's incredibly powerful and almost certainly will fuck up your entire day at least once.\"\n\nShe pulls up a diagram on her laptop. \"Regular merge creates a merge commit - a new commit that combines two branches. Rebase takes your commits and replays them on top of another branch, as if you started your work from a different point in time.\"\n\n\"Why would you want this? Clean history. Instead of a branched mess of merge commits, rebase creates a linear history that looks like everyone worked sequentially instead of in parallel.\"\n\n\"The catch? Rebase rewrites commit hashes. Every rebased commit gets a new identity. If you've already pushed these commits and someone else is working with them... congratulations, you've just fucked everyone's day.\"",
+        "choices": [
+          { "text": "Experience interactive rebase hell", "next": 25, "knowledge": 10 }
+        ]
+      },
+      "25": {
+        "type": "terminal",
+        "title": "Interactive Rebase: Choose Your Own Git Adventure",
+        "content": "Linda creates a practice scenario: \"Let's say you made three commits on a feature branch, but your commit messages are garbage and you want to clean them up before merging.\"\n\nShe shows you the commit history:\n```\ncommit c4f7e2a fix typo again\ncommit b3d9a1f fix typo\ncommit a2c8e7b add user validation\n```\n\n\"Interactive rebase lets you edit, squash, reorder, or delete commits. It's like editing a rough draft before publication, except the rough draft is your permanent commit history and mistakes can orphan entire branches.\"\n\n\"The command 'git rebase -i HEAD~3' opens an interactive rebase for the last 3 commits.\"",
+        "prompt": "Start an interactive rebase for the last 3 commits:",
+        "choices": [
+          "git rebase -i HEAD~3",
+          "git rebase --interactive HEAD~3",
+          "git interactive-rebase HEAD~3"
+        ],
+        "correctCommand": "git rebase -i HEAD~3",
+        "nextSceneOnSuccess": 26,
+        "errorMessage": "It's 'git rebase -i HEAD~3'. The -i flag means interactive. This isn't rocket science, it's just Git being unnecessarily cryptic as usual.",
+        "errorMessage2": "You got 'git rebase -i' right, but fucked up the commit range. HEAD~3 means 'the last 3 commits'. The tilde and number are important."
+      },
+      "26": {
+        "type": "narrative",
+        "title": "The Interactive Rebase Editor",
+        "content": "Git opens your default editor with what looks like a to-do list written by someone having an existential crisis:\n\n```\npick a2c8e7b add user validation\npick b3d9a1f fix typo  \npick c4f7e2a fix typo again\n\n# Commands:\n# p, pick = use commit\n# r, reword = use commit, but edit the commit message\n# s, squash = use commit, but meld into previous commit\n# d, drop = remove commit\n```\n\n\"This is rebase's interface,\" Linda explains. \"Each line is a command. 'pick' means keep the commit as-is. 'squash' combines it with the previous commit. 'drop' deletes the commit entirely.\"\n\n\"Let's squash those two typo fix commits into one. Change 'pick c4f7e2a' to 'squash c4f7e2a' and save the file.\"",
+        "choices": [
+          { "text": "Complete the rebase and pray", "next": 27, "knowledge": 11 }
+        ]
+      },
+      "27": {
+        "type": "narrative",
+        "title": "Rebase Completion",
+        "content": "You save the rebase file and Git processes your changes. After a moment, it opens another editor for the squashed commit message:\n\n```\n# This is a combination of 2 commits.\nfix typo\nfix typo again\n```\n\nYou replace it with something more professional: \"Fix validation typos\"\n\nGit responds:\n```\nSuccessfully rebased and updated refs/heads/feature-cleanup.\n```\n\n\"Congratulations,\" Linda says, \"you've successfully rewritten history. Your three messy commits are now two clean commits. The commit hashes have changed - they're completely new commits from Git's perspective.\"\n\n\"This is why you NEVER rebase commits that other people are working with. You'd orphan their work and create a parallel universe of confusion.\"",
+        "choices": [
+          { "text": "Learn about the stash dimension", "next": 28, "knowledge": 11 },
+          { "text": "Explore other Git horrors", "next": 19, "knowledge": 11 }
+        ]
+      },
+      "28": {
+        "type": "narrative",
+        "title": "Git Stash: The Dimensional Storage Unit",
+        "content": "Linda's expression becomes that of someone explaining how to perform surgery.\n\n\"Git stash is where your uncommitted changes go to live in limbo. Imagine you're working on something, but suddenly you need to switch branches to fix a critical bug. You can't commit half-finished work, and you can't switch with dirty files.\"\n\n\"Enter 'git stash' - it takes your current changes and stuffs them into a holding dimension while cleaning your working directory. Later, you can 'git stash pop' to retrieve them.\"\n\n\"Sounds simple, right? Wrong. Stash is a stack - last in, first out. People create multiple stashes and forget what's in them. You end up with a pile of anonymous change sets labeled 'WIP on main: a7f8b2c Update README' that tell you absolutely nothing useful.\"\n\n\"It's like having multiple storage units but forgetting which one has your grandmother's china and which one has your college textbooks.\"",
+        "choices": [
+          { "text": "Experience stash chaos firsthand", "next": 29, "knowledge": 12 }
+        ]
+      },
+      "29": {
+        "type": "terminal",
+        "title": "Creating Your First Stash Disaster",
+        "content": "Linda has you make some changes to a file without committing them.\n\n\"Edit something, anything. Add a comment, change a variable name. Just make the working directory dirty.\"\n\nYou add a comment to auth.js: // TODO: Add better error handling\n\n\"Perfect. Now imagine you need to urgently switch branches, but you're not ready to commit this profound insight about error handling. Time to stash it.\"\n\nThe basic stash command will save your changes with a generic message that will be utterly useless when you try to remember what you stashed.",
+        "prompt": "Stash your uncommitted changes:",
+        "choices": [
+          "git stash",
+          "git stash save",
+          "git save"
+        ],
+        "correctCommand": "git stash",
+        "nextSceneOnSuccess": 30,
+        "errorMessage": "It's literally just 'git stash'. Two words. How did you fuck up two words? This isn't advanced calculus.",
+        "errorMessage2": "You typed 'git stash' correctly, congratulations. You don't need any extra bullshit after it for the basic stash command."
+      },
+      "30": {
+        "type": "terminal",
+        "title": "Stash Recovery",
+        "content": "Git responds:\n```\nSaved working directory and index state WIP on main: a7f8b2c Update README\n```\n\nYour working directory is now clean, and your changes are in stash limbo.\n\n\"That cryptic message will be completely useless in two hours when you forget what you stashed,\" Linda explains. \"The 'WIP on main' tells you which branch, and 'a7f8b2c Update README' is the last commit message, which has nothing to do with what you actually stashed.\"\n\n\"To see what's in your stash, use 'git stash list'. To get your changes back, use 'git stash pop'.\"\n\nTime to retrieve your profound TODO comment from the stash dimension.",
+        "prompt": "Apply your stashed changes back to the working directory:",
+        "choices": [
+          "git stash pop",
+          "git stash apply",
+          "git unstash"
+        ],
+        "correctCommand": "git stash pop",
+        "nextSceneOnSuccess": 31,
+        "errorMessage": "I just explained this. 'git stash pop' applies the stash and removes it. Were you even listening?",
+        "errorMessage2": "You got 'git stash' right but 'pop' brings back the changes. What the fuck is 'unstash'? That's not a thing."
+      },
+      "31": {
+        "type": "narrative",
+        "title": "Stash Survival",
+        "content": "Your TODO comment reappears in auth.js like magic. Git responds:\n```\nDropped refs/stash@{0}\n```\n\n\"Your changes are back, and the stash is gone because you used 'pop',\" Linda explains. \"The stash system is actually quite powerful - you can name stashes, apply specific stashes by index, even create stashes of just staged files.\"\n\n\"But in practice, most developers use it as a panic button: 'Oh shit, I need to switch branches right now!' They stash everything, fix the urgent issue, then completely forget what they stashed and where they stashed it.\"\n\n\"Pro tip: Use 'git stash push -m \"meaningful description\"' to create stashes with actual useful messages. Your future self will thank you when you're not deciphering 'WIP on feature-xyz' at 2 AM.\"",
+        "choices": [
+          { "text": "Learn about other Git nightmares", "next": 19, "knowledge": 12 },
+          { "text": "Graduate from Git horror university", "next": 32, "knowledge": 15 }
+        ]
+      },
+      "32": {
+        "type": "narrative", 
+        "title": "Git Mastery: You're Still an Idiot, But a Functional One",
+        "content": "Linda closes her laptop and looks at you with something approaching respect.\n\n\"You've survived the Git gauntlet: basic workflows, merge conflicts, detached HEAD states, interactive rebasing, and stash management. You understand enough Git to be productive and only occasionally dangerous.\"\n\n\"But here's the real secret: every Git user, from junior developers to Linus Torvalds himself, occasionally fucks something up spectacularly. The difference between beginners and experts isn't that experts never break things - it's that experts know how to fix the broken things.\"\n\n\"Git is a powerful tool designed by people who think 'user-friendly' is a character flaw. It exposes all the complexity of distributed version control instead of hiding it behind a pretty interface.\"\n\n\"Welcome to the club of developers who know enough Git to be both productive and terrified. Your next milestone is learning 'git reflog' - the command that can resurrect commits from the dead. But that's a lesson for another day when you're feeling particularly masochistic.\"\n\nStatus: Certified Git-competent human being who probably won't accidentally delete the entire codebase. Probably.",
+        "choices": [
+          { "text": "Start over and practice this nightmare", "next": 0, "knowledge": 0 },
+          { "text": "I'm traumatized enough for one day", "next": 0, "knowledge": 0 }
         ]
       }
     }
